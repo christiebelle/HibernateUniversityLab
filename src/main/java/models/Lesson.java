@@ -12,15 +12,17 @@ public class Lesson {
     private String title;
     private double room;
     private Course course;
+    private Instructor teacher;
     private Set<Student> students;
 
     public Lesson() {
     }
 
-    public Lesson(String title, double room, Course course) {
+    public Lesson(String title, double room, Course course, Instructor teacher) {
         this.title = title;
         this.room = room;
         this.course = course;
+        this.teacher = teacher;
         this.students = new HashSet<Student>();
     }
 
@@ -70,6 +72,16 @@ public class Lesson {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    @ManyToOne
+    @JoinColumn(name="instructor_id", nullable = false)
+    public Instructor getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Instructor teacher) {
+        this.teacher = teacher;
     }
 
     public void addStudentToLesson(Student student){
