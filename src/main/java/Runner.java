@@ -28,6 +28,10 @@ public class Runner {
         Student student4 = new Student("Grumio", 46, 1592, course1);
         DBHelper.save(student4);
 
+        DBHelper.assignStudentToLesson(student1, lesson1);
+        DBHelper.assignStudentToLesson(student2, lesson1);
+        DBHelper.assignStudentToLesson(student3, lesson2);
+        DBHelper.assignStudentToLesson(student4, lesson2);
 
     }
 }
