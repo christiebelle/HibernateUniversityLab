@@ -1,9 +1,11 @@
 import db.DBHelper;
 import models.Course;
 import models.Lesson;
+import models.Student;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import sun.security.pkcs11.Secmod;
 
 import java.util.List;
 
@@ -13,11 +15,13 @@ public class TestLesson {
 
     private Lesson lesson;
     private Course course;
+    private Student student;
 
     @After
     public void tearDown() throws Exception {
         DBHelper.delete(course);
         DBHelper.delete(lesson);
+        DBHelper.delete(student);
     }
 
     @Before
@@ -26,6 +30,8 @@ public class TestLesson {
         DBHelper.save(course);
         lesson = new Lesson("Target the Protegee, 101", 1.01, course);
         DBHelper.save(lesson);
+        student = new Student("Iago", 21, 1603, course);
+        DBHelper.save(student);
     }
 
     @Test
@@ -42,5 +48,11 @@ public class TestLesson {
     public void testCanSave() {
         List<Lesson> results = DBHelper.getAll(Lesson.class);
         assertEquals(1, results.size());
+    }
+
+    @Test
+    public void testAddStudent() {
+        lesson.addStudentToLesson(student);
+        assertEquals(1, lesson.getStudents().size());
     }
 }
