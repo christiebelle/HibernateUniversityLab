@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,6 +23,7 @@ public class Student {
         this.age = age;
         this.studentno = studentno;
         this.course = course;
+        this.lessons = new HashSet<Lesson>();
     }
 
     @Id
@@ -82,5 +84,9 @@ public class Student {
 
     public void setLessons(Set<Lesson> lessons) {
         this.lessons = lessons;
+    }
+
+    public void addToLesson(Lesson lesson){
+        this.lessons.add(lesson);
     }
 }

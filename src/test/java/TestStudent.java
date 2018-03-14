@@ -1,5 +1,6 @@
 import db.DBHelper;
 import models.Course;
+import models.Lesson;
 import models.Student;
 import org.junit.After;
 import org.junit.Before;
@@ -13,11 +14,14 @@ public class TestStudent {
 
     private Course course;
     private Student student;
+    private Lesson lesson;
 
     @After
     public void tearDown() throws Exception {
         DBHelper.delete(course);
+        DBHelper.delete(lesson);
         DBHelper.delete(student);
+
     }
 
     @Before
@@ -26,6 +30,7 @@ public class TestStudent {
     DBHelper.save(course);
     student = new Student("Romeo", 20, 1234, course);
     DBHelper.save(student);
+    lesson = new Lesson("How not to take poison", 15.97, course);
     }
 
     @Test
@@ -42,5 +47,11 @@ public class TestStudent {
     public void testCanSave() {
         List<Student> results = DBHelper.getAll(Student.class);
         assertEquals(1, results.size());
+    }
+
+    @Test
+    public void testAddLesson() {
+        student.addToLesson(lesson);
+        assertEquals(1, student.getLessons().size());
     }
 }
