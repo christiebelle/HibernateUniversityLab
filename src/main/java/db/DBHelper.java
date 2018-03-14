@@ -1,6 +1,8 @@
 package db;
 
 import db.HibernateUtil;
+import models.Course;
+import models.Student;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -102,4 +104,9 @@ public class DBHelper {
             session.close();
         }
     }
+
+//    public static void addToCourse(Course course, Student student){
+//        student.add();
+//
+//    }
 }

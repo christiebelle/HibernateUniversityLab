@@ -69,4 +69,12 @@ public class Course {
     public void setLessons(Set<Lesson> lessons) {
         this.lessons = lessons;
     }
+
+    public void assignLessons(Lesson lesson){
+        this.lessons.add(lesson);
+    }
+
+    public void addStudentToCourse(Student student){
+        this.students.add(student);
+    }
 }
