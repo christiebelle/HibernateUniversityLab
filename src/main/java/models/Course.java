@@ -11,7 +11,7 @@ public class Course {
     private int id;
     private String title;
     private String level;
-    private Set<Instructor> teachers;
+    private Set<Instructor> instructors;
     private Set<Student> students;
     private Set<Lesson> lessons;
 
@@ -21,7 +21,7 @@ public class Course {
     public Course(String title, String level) {
         this.title = title;
         this.level = level;
-        this.teachers = new HashSet<Instructor>();
+        this.instructors = new HashSet<Instructor>();
         this.lessons = new HashSet<Lesson>();
         this.students = new HashSet<Student>();
     }
@@ -77,12 +77,12 @@ public class Course {
     @JoinTable(name="instructor_courses",
     joinColumns = {@JoinColumn(name="course_id", nullable = false, updatable = false)},
     inverseJoinColumns = {@JoinColumn(name="instructor_id", nullable = false, updatable = false)})
-    public Set<Instructor> getTeachers() {
-        return teachers;
+    public Set<Instructor> getInstructors() {
+        return instructors;
     }
 
-    public void setTeachers(Set<Instructor> teachers) {
-        this.teachers = teachers;
+    public void setinstructors(Set<Instructor> instructors) {
+        this.instructors = instructors;
     }
 
     public void assignLessons(Lesson lesson){
@@ -94,7 +94,7 @@ public class Course {
     }
 
     public void addInstructorToCourse(Instructor instructor){
-        this.teachers.add(instructor);
+        this.instructors.add(instructor);
     }
 
 

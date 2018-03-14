@@ -1,5 +1,6 @@
 import db.DBHelper;
 import models.Course;
+import models.Instructor;
 import models.Lesson;
 import models.Student;
 import org.junit.After;
@@ -16,19 +17,23 @@ public class TestLesson {
     private Lesson lesson;
     private Course course;
     private Student student;
+    private Instructor teacher;
 
     @After
     public void tearDown() throws Exception {
         DBHelper.delete(course);
         DBHelper.delete(lesson);
         DBHelper.delete(student);
+        DBHelper.delete(teacher);
     }
 
     @Before
     public void setUp() throws Exception {
+        teacher = new Instructor("William Shakespeare");
+        DBHelper.save(teacher);
         course = new Course("How to destroy your Best Pal", "MA");
         DBHelper.save(course);
-        lesson = new Lesson("Target the Protegee, 101", 1.01, course);
+        lesson = new Lesson("Target the Protegee, 101", 1.01, course, teacher);
         DBHelper.save(lesson);
         student = new Student("Iago", 21, 1603, course);
         DBHelper.save(student);

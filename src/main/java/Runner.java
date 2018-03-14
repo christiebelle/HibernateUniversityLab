@@ -1,5 +1,6 @@
 import db.DBHelper;
 import models.Course;
+import models.Instructor;
 import models.Lesson;
 import models.Student;
 
@@ -10,13 +11,16 @@ public class Runner {
 
     public static void main(String[] args) {
 
+        Instructor instructor = new Instructor("William Shakespeare");
+        DBHelper.save(instructor);
+
         Course course1 = new Course("How to invade France", "BSc");
         DBHelper.save(course1);
 
-        Lesson lesson1 = new Lesson("Attacking Harfleur", 141.5, course1);
+        Lesson lesson1 = new Lesson("Attacking Harfleur", 141.5, course1, instructor);
         DBHelper.save(lesson1);
 
-        Lesson lesson2 = new Lesson("How to Win at Agincourt", 14.15, course1);
+        Lesson lesson2 = new Lesson("How to Win at Agincourt", 14.15, course1, instructor);
         DBHelper.save(lesson2);
 
         Student student1 = new Student("Pedant", 18, 1898, course1);
