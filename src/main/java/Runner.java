@@ -37,6 +37,13 @@ public class Runner {
         DBHelper.assignStudentToLesson(student4, lesson2);
 
         List<Student> enrolledStudents = DBHelper.getEnrolledStudents(lesson1.getId());
+        List<Student> enrolledStudents1 = DBHelper.getEnrolledStudents(lesson2.getId());
+
+        Lesson studentsInLesson = DBHelper.find(Lesson.class, lesson1.getId());
+
+        Course lessonsOnCourse = DBHelper.find(Course.class, course1.getId());
+
+        List<Lesson> courseLessons = DBHelper.listLessonsForCourse(course1);
 
     }
 }

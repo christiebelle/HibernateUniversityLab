@@ -116,10 +116,20 @@ public class DBHelper {
     public static List<Student> getEnrolledStudents(int id){
         session = HibernateUtil.getSessionFactory().openSession();
         List<Student> result = null;
-        Criteria cr = session.createCriteria(Lesson.class);
+        Criteria cr = session.createCriteria(Student.class);
         cr.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         cr.add(Restrictions.eq("id", id));
         result = getList(cr);
         return result;
+    }
+
+    public static List<Lesson> listLessonsForCourse(Course course){
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Lesson> results = null;
+        Criteria cr = session.createCriteria(Lesson.class);
+        cr.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        cr.add(Restrictions.eq("course", course));
+        results = getList(cr);
+        return results;
     }
 }
