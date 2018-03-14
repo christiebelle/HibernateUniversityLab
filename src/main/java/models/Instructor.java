@@ -1,0 +1,67 @@
+package models;
+
+import com.sun.javafx.beans.IDProperty;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Table(name="instructors")
+public class Instructor {
+
+    private int id;
+    private String name;
+    private Set<Course> courses;
+    private Set<Lesson> lessons;
+
+    public Instructor() {
+    }
+
+    public Instructor(String name) {
+        this.name = name;
+        this.courses = new HashSet<Course>();
+        this.lessons = new HashSet<Lesson>();
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Column(name="name")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @ManyToMany
+    @JoinTable(name="instructor_courses",
+    joinColumns = {@JoinColumn(name="instructor_id", nullable = false, updatable = false)},
+    inverseJoinColumns = {@JoinColumn(name="course_id", nullable = false, updatable = false)})
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
+    }
+
+    @OneToMany(mappedBy = "instructor")
+    public Set<Lesson> getLessons() {
+        return lessons;
+    }
+
+    public void setLessons(Set<Lesson> lessons) {
+        this.lessons = lessons;
+    }
+}

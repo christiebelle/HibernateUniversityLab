@@ -44,6 +44,7 @@ public class Runner {
         Course lessonsOnCourse = DBHelper.find(Course.class, course1.getId());
 
         List<Lesson> courseLessons = DBHelper.listLessonsForCourse(course1);
+        List<Student> courseStudents = DBHelper.listStudentsByCourse(course1);
 
     }
 }

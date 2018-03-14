@@ -9,6 +9,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import sun.tools.java.ClassType;
 
 import java.util.List;
 
@@ -127,6 +128,16 @@ public class DBHelper {
         session = HibernateUtil.getSessionFactory().openSession();
         List<Lesson> results = null;
         Criteria cr = session.createCriteria(Lesson.class);
+        cr.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        cr.add(Restrictions.eq("course", course));
+        results = getList(cr);
+        return results;
+    }
+
+    public static List<Student> listStudentsByCourse(Course course){
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Student> results = null;
+        Criteria cr = session.createCriteria(Student.class);
         cr.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         cr.add(Restrictions.eq("course", course));
         results = getList(cr);
