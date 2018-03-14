@@ -3,6 +3,9 @@ import models.Course;
 import models.Lesson;
 import models.Student;
 
+import java.util.List;
+
+
 public class Runner {
 
     public static void main(String[] args) {
@@ -32,6 +35,8 @@ public class Runner {
         DBHelper.assignStudentToLesson(student2, lesson1);
         DBHelper.assignStudentToLesson(student3, lesson2);
         DBHelper.assignStudentToLesson(student4, lesson2);
+
+        List<Student> enrolledStudents = DBHelper.getEnrolledStudents(lesson1.getId());
 
     }
 }
