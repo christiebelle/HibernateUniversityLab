@@ -21,6 +21,7 @@ public class Course {
         this.title = title;
         this.level = level;
         this.lessons = new HashSet<Lesson>();
+        this.students = new HashSet<Student>();
     }
 
     @Id
