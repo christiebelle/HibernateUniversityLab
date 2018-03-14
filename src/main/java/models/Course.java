@@ -11,6 +11,7 @@ public class Course {
     private int id;
     private String title;
     private String level;
+    private Set<Instructor> teachers;
     private Set<Student> students;
     private Set<Lesson> lessons;
 
@@ -20,6 +21,7 @@ public class Course {
     public Course(String title, String level) {
         this.title = title;
         this.level = level;
+        this.teachers = new HashSet<Instructor>();
         this.lessons = new HashSet<Lesson>();
         this.students = new HashSet<Student>();
     }
@@ -71,6 +73,18 @@ public class Course {
         this.lessons = lessons;
     }
 
+    @ManyToMany
+    @JoinTable(name="instructor_courses",
+    joinColumns = {@JoinColumn(name="course_id", nullable = false, updatable = false)},
+    inverseJoinColumns = {@JoinColumn(name="instructor_id", nullable = false, updatable = false)})
+    public Set<Instructor> getTeachers() {
+        return teachers;
+    }
+
+    public void setTeachers(Set<Instructor> teachers) {
+        this.teachers = teachers;
+    }
+
     public void assignLessons(Lesson lesson){
         this.lessons.add(lesson);
     }
@@ -78,4 +92,10 @@ public class Course {
     public void addStudentToCourse(Student student){
         this.students.add(student);
     }
+
+    public void addInstructorToCourse(Instructor instructor){
+        this.teachers.add(instructor);
+    }
+
+
 }
